@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 @interface SGDirWatchdog : NSObject {
-    NSString *_path;
+    NSString *__weak _path;
     void (^_update)(void);
     int					_dirFD;
 	CFFileDescriptorRef	_kqRef;

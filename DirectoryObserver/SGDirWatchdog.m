@@ -13,7 +13,7 @@
 @interface SGDirWatchdog ()
 
 @property (nonatomic, assign, readonly) CFFileDescriptorRef _kqRef;
-@property (nonatomic, retain) NSArray* fns;
+@property (nonatomic, strong) NSArray* fns;
 
 - (void)kqueueFired;
 
@@ -23,7 +23,7 @@
 static void KQCallback(CFFileDescriptorRef kqRef, CFOptionFlags callBackTypes, void *info)
 {
 	// Pick up the object passed in the "info" member of the CFFileDescriptorContext passed to CFFileDescriptorCreate
-    SGDirWatchdog* obj = (SGDirWatchdog*) info;
+    SGDirWatchdog* obj = (__bridge SGDirWatchdog*) info;
 	
 	if ([obj isKindOfClass:[SGDirWatchdog class]]		&&	// If we can call back to the proper sort of object ...
 		(kqRef == obj._kqRef)								&&	// and the FD that issued the CB is the expected one ...
@@ -41,7 +41,7 @@ static void KQCallback(CFFileDescriptorRef kqRef, CFOptionFlags callBackTypes, v
 
 - (id)initWithPath:(NSString *)path update:(void (^)(void))update; {
     if ((self = [super init])) {
-        _path = [path retain];
+        _path = path;
         _update = [update copy];
     }
     return self;
@@ -50,10 +50,7 @@ static void KQCallback(CFFileDescriptorRef kqRef, CFOptionFlags callBackTypes, v
 - (void)dealloc {
     [self stop];
     
-    [_path release];
-    [_update release];
     
-    [super dealloc];
 }
 
 #pragma mark -
@@ -119,7 +116,7 @@ static void KQCallback(CFFileDescriptorRef kqRef, CFOptionFlags callBackTypes, v
 	}
 	
 	// Wrap a CFFileDescriptor around a native FD
-	CFFileDescriptorContext context = {0, self, NULL, NULL, NULL};
+	CFFileDescriptorContext context = {0, (__bridge void *)(self), NULL, NULL, NULL};
     _kqRef = CFFileDescriptorCreate(NULL,		// Use the default allocator
 									kq,			// Wrap the kqueue
 									true,		// Close the CFFileDescriptor if kq is invalidated

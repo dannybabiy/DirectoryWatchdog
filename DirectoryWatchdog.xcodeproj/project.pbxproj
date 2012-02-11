@@ -32,7 +32,7 @@
 		F418D4371433607D00E51633 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		F418D4391433607D00E51633 /* SGViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGViewController.h; sourceTree = "<group>"; };
 		F418D43A1433607D00E51633 /* SGViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGViewController.m; sourceTree = "<group>"; };
-		F418D441143362C600E51633 /* SGDirWatchdog.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SGDirWatchdog.h; sourceTree = "<group>"; };
+		F418D441143362C600E51633 /* SGDirWatchdog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGDirWatchdog.h; sourceTree = "<group>"; };
 		F418D442143362C600E51633 /* SGDirWatchdog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGDirWatchdog.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -241,6 +241,7 @@
 		F418D43F1433607D00E51633 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DirectoryObserver/DirectoryWatchdog-Prefix.pch";
 				INFOPLIST_FILE = "DirectoryObserver/DirectoryWatchdog-Info.plist";
@@ -252,6 +253,7 @@
 		F418D4401433607D00E51633 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DirectoryObserver/DirectoryWatchdog-Prefix.pch";
 				INFOPLIST_FILE = "DirectoryObserver/DirectoryWatchdog-Info.plist";
